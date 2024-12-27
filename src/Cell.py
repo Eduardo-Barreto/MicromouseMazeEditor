@@ -46,10 +46,10 @@ class Cell(Widget):
         cell_center_x = self.size.width / 2
         cell_center_y = self.size.height / 2
 
-        left = cell_center_x - event.x
-        right = event.x - cell_center_x
         top = cell_center_y - event.y
+        right = event.x - cell_center_x
         bottom = event.y - cell_center_y
+        left = cell_center_x - event.x
 
         self.update_cursor()
         self.post_message(self.Selected(self))
@@ -57,14 +57,14 @@ class Cell(Widget):
         if not self.selected:
             return
 
-        if left > right and left > top and left > bottom:
-            self.post_message(self.ToggleWall(self.row, self.col, 3))
-        elif right > left and right > top and right > bottom:
-            self.post_message(self.ToggleWall(self.row, self.col, 1))
         elif top > left and top > right and top > bottom:
             self.post_message(self.ToggleWall(self.row, self.col, 0))
+        elif right > left and right > top and right > bottom:
+            self.post_message(self.ToggleWall(self.row, self.col, 1))
         elif bottom > left and bottom > right and bottom > top:
             self.post_message(self.ToggleWall(self.row, self.col, 2))
+        if left > right and left > top and left > bottom:
+            self.post_message(self.ToggleWall(self.row, self.col, 3))
 
     def update_cursor(self) -> None:
         """Atualiza o estilo da célula, destacando-a quando selecionada."""
