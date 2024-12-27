@@ -7,19 +7,18 @@ from Cell import Cell
 class Grid(Widget):
     """Representa o labirinto, contendo uma grade de células e controle de navegação e paredes."""
 
-    SIZE = 8
-
-    def __init__(self) -> None:
+    def __init__(self, size: int) -> None:
         super().__init__()
+        self.grid_size = size
         self.styles.layout = "grid"
 
-        self.styles.grid_size_rows = self.SIZE
-        self.styles.grid_size_columns = self.SIZE
+        self.styles.grid_size_rows = self.grid_size
+        self.styles.grid_size_columns = self.grid_size
 
         self.cursor_row = 0
         self.cursor_col = 0
         self.grid = [
-            [Cell(row, col) for col in range(self.SIZE)] for row in range(self.SIZE)
+            [Cell(row, col) for col in range(self.grid_size)] for row in range(self.grid_size)
         ]
 
     def compose(self) -> ComposeResult:
@@ -43,8 +42,8 @@ class Grid(Widget):
 
     def move_cursor(self, row_offset: int, col_offset: int) -> None:
         """Move o cursor na direção especificada."""
-        row = (self.cursor_row + row_offset) % self.SIZE
-        col = (self.cursor_col + col_offset) % self.SIZE
+        row = (self.cursor_row + row_offset) % self.grid_size
+        col = (self.cursor_col + col_offset) % self.grid_size
         self.update_cursor(row, col)
 
     def set_cursor(self, row: int, col: int) -> None:
@@ -76,14 +75,14 @@ class Grid(Widget):
                 return
             self.grid[row - 1][col].toggle_wall(2)
         elif direction == 1:  # Leste
-            if col == self.SIZE - 1:
+            if col == self.grid_size - 1:
                 return
-            self.grid[row][col + 1 % self.SIZE].toggle_wall(3)
+            self.grid[row][col + 1 % self.grid_size].toggle_wall(3)
         elif direction == 2:  # Sul
-            if row == self.SIZE - 1:
+            if row == self.grid_size - 1:
                 return
-            self.grid[row + 1 % self.SIZE][col].toggle_wall(0)
+            self.grid[row + 1 % self.grid_size][col].toggle_wall(0)
         elif direction == 3:  # Oeste
             if col == 0:
                 return
-            self.grid[row][col - 1 % self.SIZE].toggle_wall(1)
+            self.grid[row][col - 1 % self.grid_size].toggle_wall(1)

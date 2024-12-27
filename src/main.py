@@ -12,7 +12,7 @@ class MazeApp(App):
 
     def compose(self) -> ComposeResult:
         """Componha o labirinto para o aplicativo."""
-        self.grid = Grid()
+        self.grid = Grid(16)
         yield self.grid
 
     def action_toggle_wall(self, direction: int) -> None:
