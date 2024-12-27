@@ -1,0 +1,9 @@
+.focused {
+  background: yellow;
+}
+
+Cell {
+  align: center middle;
+  box_sizing: border-box;
+}
+
