@@ -81,7 +81,6 @@ class MazeApp(App):
 
     def on_mount(self):
         self.action_navigate(0, 0)
-        self.action_toggle_wall(0)
 
     def key_up(self):
         self.action_navigate(-1, 0)
