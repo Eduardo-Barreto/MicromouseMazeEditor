@@ -74,13 +74,21 @@ class Maze(Widget):
     def toggle_neighbor_wall(self, row: int, col: int, direction: int) -> None:
         """Alterna a parede da célula vizinha com base na direção especificada."""
         if direction == 0:  # Norte
+            if row == 0:
+                return
             self.grid[row - 1][col].toggle_wall(2)
         elif direction == 1:  # Leste
-            self.grid[row][col + 1].toggle_wall(3)
+            if col == self.SIZE - 1:
+                return
+            self.grid[row][col + 1 % self.SIZE].toggle_wall(3)
         elif direction == 2:  # Sul
-            self.grid[row + 1][col].toggle_wall(0)
+            if row == self.SIZE - 1:
+                return
+            self.grid[row + 1 % self.SIZE][col].toggle_wall(0)
         elif direction == 3:  # Oeste
-            self.grid[row][col - 1].toggle_wall(1)
+            if col == 0:
+                return
+            self.grid[row][col - 1 % self.SIZE].toggle_wall(1)
 
 
 class MazeApp(App):
