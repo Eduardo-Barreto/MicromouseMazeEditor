@@ -3,7 +3,5 @@
 }
 
 Cell {
-  align: center middle;
-  box_sizing: border-box;
+    content-align: center middle;
 }
-
