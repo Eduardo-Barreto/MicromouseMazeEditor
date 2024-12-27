@@ -57,13 +57,13 @@ class Cell(Widget):
         if not self.selected:
             return
 
-        elif top > left and top > right and top > bottom:
+        if top > left and top > right and top > bottom:
             self.post_message(self.ToggleWall(self.row, self.col, 0))
         elif right > left and right > top and right > bottom:
             self.post_message(self.ToggleWall(self.row, self.col, 1))
         elif bottom > left and bottom > right and bottom > top:
             self.post_message(self.ToggleWall(self.row, self.col, 2))
-        if left > right and left > top and left > bottom:
+        elif left > right and left > top and left > bottom:
             self.post_message(self.ToggleWall(self.row, self.col, 3))
 
     def update_cursor(self) -> None:
